@@ -2,16 +2,18 @@ package com.example.hussain_progect_tp.logica;
 
 import com.example.hussain_progect_tp.servizi.DBConnection;
 import com.example.hussain_progect_tp.servizi.PasswordHash;
-import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class RegisterLogica {
-    public boolean register(String username,String email,String nome,String cognome,String password){
+public class SigninLogica {
+    public boolean insert_user(String username,String email,String nome,String cognome,String password){
 
         try{
+            if(password == null){
+                return false;
+            }
            Connection connection = DBConnection.getConnection();
             String pass = PasswordHash.hash(password);
            String query = "INSERT INTO users (username, email, nome, cognome, password_hash) " +

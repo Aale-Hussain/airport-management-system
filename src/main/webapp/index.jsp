@@ -4,11 +4,13 @@
     <title>Index</title>
 </head>
 <body>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%
-    //senza index the tomcat non la sa dove andare questo manda al login
-    response.sendRedirect("login.jsp");
+    HttpSession currentSession = request.getSession(false);
+    if (currentSession != null && currentSession.getAttribute("user") != null) {
+        response.sendRedirect("map.jsp");
+    } else {
+        response.sendRedirect("login.jsp");
+    }
 %>
 </body>
 </html>
