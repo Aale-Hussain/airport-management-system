@@ -1,10 +1,28 @@
-✈ AeroPorto — Flight Simulation & Airport Management System
+# ✈ AeroPorto — Java EE Airport Management System
 
 AeroPorto is a full-stack Java EE web application that simulates flight booking and airport management using real-world geographic data.
 
 Users can explore airports on an interactive map, save favorite locations, and simulate flight bookings between destinations.
 
 The application follows the MVC architecture, separating presentation (JSP), business logic (Servlets), and persistence (MySQL).
+
+---
+
+## 📸 Preview
+
+> Add screenshots in an `/images` folder
+
+- Login Page  
+![Login](images/login.png)
+
+- Interactive Map  
+![Map](images/map.png)
+
+- Booking System  
+![Booking](images/booking.png)
+
+- Favorites Page  
+![Favorites](images/favorites.png)
 
 ---
 
@@ -23,9 +41,9 @@ The application follows the MVC architecture, separating presentation (JSP), bus
 ## 🧠 Architecture Overview
 
 - MVC pattern (JSP → Servlets → MySQL)
-- Layered backend design (Controller / Service / DAO style separation)
+- Layered backend design (Controller / Service / DAO separation)
 - Secure session management with authentication filters
-- Integration with external APIs for geolocation and mapping
+- External API integration for geolocation and airport mapping
 
 ---
 
@@ -41,7 +59,7 @@ The application follows the MVC architecture, separating presentation (JSP), bus
 
 ---
 
-## 🔐 Security Highlights
+## 🔐 Security Features
 
 - Passwords hashed using BCrypt
 - OAuth2 authentication via Google Identity Services
@@ -50,27 +68,8 @@ The application follows the MVC architecture, separating presentation (JSP), bus
 
 ---
 
-## 📈 Future Improvements
+## ⚙️ How to Run
 
-- Real-time flight tracking simulation
-- Role-based admin dashboard
-- Booking modification system (edit instead of delete/recreate)
-- Public read-only map access for non-authenticated users
-
----
-
-## 👨‍💻 Project Highlights
-
-This project demonstrates:
-
-- Full-stack Java EE development
-- Secure authentication systems (OAuth2 + session-based security)
-- REST API integration (OpenStreetMap services)
-- Relational database design and management
-- Interactive geospatial UI development
-
----
-
-## 📌 Purpose
-
-Built as a portfolio project to demonstrate backend development skills, secure authentication flows, and integration of real-world mapping APIs in a Java EE architecture.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/aeroporto.git
