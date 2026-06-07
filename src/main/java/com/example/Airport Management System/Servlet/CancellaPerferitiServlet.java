@@ -15,8 +15,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-@WebServlet(name = "prenotazioneupdate", value = "/UpdatePrenotazioneServlet")
-public class UpdatePrenotazioneServlet extends HttpServlet {
+@WebServlet(name = "cancellaperferiti", value  = "/CancellaPerferitiServlet")
+public class CancellaPerferitiServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         User user = (User)session.getAttribute("user");
@@ -24,17 +24,16 @@ public class UpdatePrenotazioneServlet extends HttpServlet {
             response.sendRedirect("login.jsp");
             return;
         }
-        int prenotazione_id = Integer.parseInt(request.getParameter("prenotazione_id"));
-        String q = "DELETE FROM prenotazione WHERE prenotazione_id =? and user_id = ?";
+        int poi_id = Integer.parseInt(request.getParameter("poi_id"));
+        String q = "Delete from user_poi where poi_id = ? and user_id = ?";
         try(Connection con = DBConnection.getConnection();
             PreparedStatement ps = con.prepareStatement(q)){
-            ps.setInt(1, prenotazione_id);
+            ps.setInt(1, poi_id);
             ps.setInt(2, user.getUser_id());
             ps.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        response.sendRedirect("protected_jsp/prenotazione.jsp?cancelled=ok");
+        response.sendRedirect("protected_jsp/perferiti.jsp?cancella=ok");
     }
 }

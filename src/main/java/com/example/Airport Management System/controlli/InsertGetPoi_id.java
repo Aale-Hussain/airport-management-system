@@ -1,15 +1,14 @@
 package com.example.hussain_progect_tp.controlli;
 
 import com.example.hussain_progect_tp.servizi.DBConnection;
-import com.mysql.cj.exceptions.ConnectionIsClosedException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class GetPoi_id {
-    public int getpoi_id(long osm_id,String name,double lat, double lon,String type) {
+public class InsertGetPoi_id {
+    public int insertgetpoi_id(long osm_id,String name,double lat, double lon,String type) {
 
         try (Connection conn = DBConnection.getConnection()){
             String q = "insert ignore into poi (osm_id,name,lat,lon,type) values (?,?,?,?,?)";

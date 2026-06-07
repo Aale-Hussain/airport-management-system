@@ -31,11 +31,12 @@ body {
     background-color: var(--bg);
     color: var(--text);
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    /* Diagonal grid lines — like a runway map */
     background-image:
             linear-gradient(rgba(245, 166, 35, 0.03) 1px, transparent 1px),
             linear-gradient(90deg, rgba(245, 166, 35, 0.03) 1px, transparent 1px);
@@ -275,3 +276,342 @@ body {
     max-width: 420px;
     padding: 20px;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   PAGE LAYOUT — shared by profile / preferiti / prenotazioni
+   ═══════════════════════════════════════════════════════════ */
+
+.page-body {
+    font-family: var(--font-main);
+    background-color: var(--bg);
+    background-image:
+            linear-gradient(rgba(245,166,35,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(245,166,35,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: var(--text);
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: block;
+    overflow-y: auto;
+}
+
+.page-container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+}
+
+/* ── Back link ──────────────────────────────────────────── */
+.back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    transition: color var(--transition);
+}
+.back-link:hover { color: var(--accent); }
+
+/* ── Page header ────────────────────────────────────────── */
+.page-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+}
+
+.page-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--accent);
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 8px;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text);
+    line-height: 1;
+}
+
+.page-subtitle {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    margin-top: 8px;
+    text-transform: uppercase;
+}
+
+/* ── Booking / Favourites cards ─────────────────────────── */
+.booking-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    transition: border-color var(--transition), box-shadow var(--transition);
+    animation: fadeUp 0.3s ease both;
+}
+
+.booking-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(245,166,35,0.15),
+    0 4px 20px rgba(0,0,0,0.4);
+}
+
+.booking-info { flex: 1; min-width: 0; }
+
+.booking-route {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.booking-route .arrow {
+    color: var(--accent);
+    font-size: 20px;
+}
+
+.booking-date {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 2px;
+    margin-top: 6px;
+    text-transform: uppercase;
+}
+
+.booking-id {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+
+.booking-type {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+.booking-comment {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    padding: 6px 10px;
+    background: var(--surface2);
+    border-radius: var(--radius);
+    border-left: 2px solid var(--accent);
+}
+
+.liked-badge {
+    color: var(--error);
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+/* ── Cancel / Remove button ─────────────────────────────── */
+.btn-cancel {
+    background: transparent;
+    color: var(--error);
+    border: 1px solid rgba(255,71,87,0.3);
+    border-radius: var(--radius);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 8px 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+    flex-shrink: 0;
+}
+.btn-cancel:hover {
+    background: rgba(255,71,87,0.1);
+    border-color: var(--error);
+    box-shadow: 0 0 12px rgba(255,71,87,0.2);
+}
+
+/* ── Empty state ────────────────────────────────────────── */
+.empty-msg {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    padding: 60px 0;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+}
+
+/* ── Nav links ──────────────────────────────────────────── */
+.nav-links {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+}
+.nav-links a {
+    color: var(--accent2);
+    text-decoration: none;
+    transition: color var(--transition);
+    margin: 0 12px;
+}
+.nav-links a:hover { color: var(--accent); }
+
+/* ── Success/error message inline ───────────────────────── */
+.prenotazioni-msg {
+    margin-bottom: 20px;
+}
+
+/* ── Count badge ────────────────────────────────────────── */
+.count-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    background: rgba(245,166,35,0.1);
+    border: 1px solid rgba(245,166,35,0.2);
+    border-radius: 20px;
+    padding: 3px 10px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+/* ── Profile card ───────────────────────────────────────── */
+.profile-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 36px;
+    box-shadow: 0 0 0 1px var(--border),
+    0 8px 40px rgba(0,0,0,0.5),
+    0 -2px 0 0 var(--accent) inset;
+    animation: fadeUp 0.4s ease both;
+}
+
+.profile-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(245,166,35,0.1);
+    border: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 auto 20px;
+    letter-spacing: 1px;
+}
+
+.profile-email-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--accent2);
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.2);
+    border-radius: 20px;
+    padding: 4px 12px;
+    margin-top: 6px;
+}
+
+.google-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--success);
+    background: rgba(46,213,115,0.08);
+    border: 1px solid rgba(46,213,115,0.2);
+    border-radius: 20px;
+    padding: 4px 12px;
+    margin-top: 6px;
+    margin-left: 6px;
+}
+
+.field-readonly {
+    width: 100%;
+    padding: 11px 14px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text-muted);
+    font-family: var(--font-main);
+    font-size: 15px;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+
+.google-wrapper {
+    width: 100%;
+    margin-top: 8px;
+    overflow: hidden;
+    direction: ltr;
+}
+
+.g_id_signin {
+    width: 300px !important;
+    transform: none !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+.g_id_signin > div {
+    width: 300px !important;
+    min-width: unset !important;
+    max-width: 300px !important;
+    margin: 0 auto !important;
+}
+
+.g_id_signin iframe {
+    width: 300px !important;
+    min-width: unset !important;
+    max-width: 300px !important;
+    margin: 0 auto !important;
+    display: block !important;
+}
+
+#credential_picker_container,
+#credential_picker_iframe {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+

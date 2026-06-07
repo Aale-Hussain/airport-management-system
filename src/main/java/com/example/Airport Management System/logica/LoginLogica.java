@@ -11,14 +11,11 @@ import java.sql.SQLException;
 
 public class LoginLogica {
     public User login(String email, String password) {
-        try{
-
-            Connection conn = DBConnection.getConnection();
-
-            String query =  "SELECT user_id, username, email, nome, cognome, google_id, password_hash " +
-                    "FROM users " +
-                    "WHERE email = ?";
-            PreparedStatement ps  = conn.prepareStatement(query);
+        String query =  "SELECT user_id, username, email, nome, cognome, google_id, password_hash " +
+                "FROM users " +
+                "WHERE email = ?";
+            try( Connection conn = DBConnection.getConnection();
+                 PreparedStatement ps  = conn.prepareStatement(query)){
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){

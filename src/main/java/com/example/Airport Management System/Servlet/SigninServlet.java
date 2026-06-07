@@ -7,23 +7,34 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "siginservlet", value = "/signin")
 public class SigninServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String nome = request.getParameter("nome");
         String cognome = request.getParameter("cognome");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String username = request.getParameter("username");
+        HttpSession session = request.getSession();
+        session.setAttribute("temp_username", username);
+        session.setAttribute("temp_nome", nome);
+        session.setAttribute("temp_cognome", cognome);
+        session.setAttribute("temp_email", email);
+        if(password == null || (password.trim()).length() < 6) {
+            response.sendRedirect("signin.jsp?error=1");
+            return;
+        }
         SigninLogica signinLogica = new SigninLogica();
         boolean done = signinLogica.insert_user(username, email, nome, cognome, password);
-        if(done){
+        if (done) {
             response.sendRedirect("login.jsp");
-        }else{
-            response.sendRedirect("signin.jsp?error=1&email="+email);
+        } else {
+            response.sendRedirect("signin.jsp?error=1");
         }
     }
 

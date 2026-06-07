@@ -17,12 +17,16 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        if (password == null) {
+            response.sendRedirect("login.jsp?error=google");
+            return;
+        }
         LoginLogica loginLogica = new LoginLogica();
         User user = loginLogica.login(email, password);
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("protected_jsp/map.jsp");
         } else {
             response.sendRedirect("login.jsp?error=1");
         }

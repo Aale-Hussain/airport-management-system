@@ -9,16 +9,16 @@ import java.sql.SQLException;
 
 public class SigninLogica {
     public boolean insert_user(String username,String email,String nome,String cognome,String password){
-
-        try{
+        String query = "INSERT INTO users (username, email, nome, cognome, password_hash) " +
+                "VALUES (?, ?, ?, ?, ?) ";
+        try(Connection connection = DBConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query)){
             if(password == null){
                 return false;
             }
-           Connection connection = DBConnection.getConnection();
+
             String pass = PasswordHash.hash(password);
-           String query = "INSERT INTO users (username, email, nome, cognome, password_hash) " +
-                   "VALUES (?, ?, ?, ?, ?) ";
-            PreparedStatement ps = connection.prepareStatement(query);
+
             ps.setString(1, username);
             ps.setString(2, email);
             ps.setString(3, nome);

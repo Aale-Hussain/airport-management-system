@@ -1,0 +1,457 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+:root {
+    --bg:           #0a0e17;
+    --surface:      #111827;
+    --surface2:     #1a2235;
+    --border:       #243047;
+    --accent:       #f5a623;
+    --accent2:      #00d4ff;
+    --text:         #e8edf5;
+    --text-muted:   #6b7a99;
+    --error:        #ff4757;
+    --success:      #2ed573;
+    --font-main:    'Rajdhani', sans-serif;
+    --font-mono:    'Share Tech Mono', monospace;
+    --radius:       6px;
+    --transition:   0.2s ease;
+}
+body { margin: 0; display: block; }
+
+#search-bar {
+    position: absolute;
+    top: 16px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: flex;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+#search-bar input {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: var(--font-main);
+    font-size: 14px;
+    padding: 8px 12px;
+    outline: none;
+}
+
+#search-bar input:focus { border-color: var(--accent); }
+
+#search-bar button {
+    background: var(--accent);
+    color: #0a0e17;
+    border: none;
+    border-radius: var(--radius);
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+#result-count {
+    position: absolute;
+    bottom: 30px; left: 16px;
+    z-index: 100;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    background: var(--surface);
+    padding: 6px 12px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+
+#poi-address {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+}
+
+#map{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+
+/* ── Profile Menu ─────────────────────────────────────── */
+
+.profile-menu{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+/* Round airport-style profile button */
+.profile-btn{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+
+    background: var(--surface);
+    color: var(--accent);
+
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition:
+            background var(--transition),
+            border-color var(--transition),
+            box-shadow var(--transition),
+            transform var(--transition);
+
+    box-shadow:
+            0 0 0 1px var(--border),
+            0 4px 16px rgba(0,0,0,0.45);
+}
+
+.profile-btn:hover{
+    border-color: var(--accent);
+    color: #fff;
+
+    box-shadow:
+            0 0 14px rgba(245,166,35,0.25);
+
+    transform: translateY(-1px);
+}
+
+/* Dropdown menu */
+.profile-dropdown{
+    position: absolute;
+    top: 58px;
+    right: 0;
+
+    width: 180px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    overflow: hidden;
+
+    display: none;
+
+    box-shadow:
+            0 8px 28px rgba(0,0,0,0.5);
+}
+
+
+/* add this — keeps dropdown open when hovering over it too */
+.profile-dropdown:hover {
+    display: block;
+}
+
+/* Username section */
+.profile-name{
+    padding: 14px 16px;
+
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+
+    color: var(--accent);
+
+    border-bottom: 1px solid var(--border);
+
+    background: rgba(245,166,35,0.05);
+}
+
+/* Menu links */
+.profile-dropdown a{
+    display: block;
+
+    padding: 12px 16px;
+
+    text-decoration: none;
+
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+
+    transition:
+            background var(--transition),
+            color var(--transition);
+}
+
+.profile-dropdown a:hover{
+    background: var(--surface2);
+    color: var(--accent2);
+}
+
+.profile-menu{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.profile-menu:hover .profile-dropdown {
+    display: block;
+}
+#poi-panel input[type="text"] {
+    width: 100%;
+    padding: 8px 10px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: var(--font-main);
+    font-size: 13px;
+    margin-top: 4px;
+    outline: none;
+}
+
+#poi-save-btn {
+    margin-top: 12px;
+    width: 100%;
+    padding: 9px;
+    background: var(--accent);
+    color: #0a0e17;
+    border: none;
+    border-radius: var(--radius);
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+#poi-save-btn:hover {
+    background: #ffc04a;
+}
+
+#poi-save-msg {
+    margin-top: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--success);
+}
+
+.poi-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+/* dark overlay behind modal */
+#poi-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+}
+
+/* centered modal */
+#poi-panel {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 201;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 20px 20px;
+    min-width: 280px;
+    max-width: 360px;
+    width: 90%;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.7);
+}
+
+#poi-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#poi-close:hover { color: var(--error); }
+
+#poi-panel h3 {
+    color: var(--accent);
+    font-family: var(--font-main);
+    font-size: 18px;
+    margin-bottom: 6px;
+    padding-right: 20px;
+}
+
+/* heart button */
+#poi-heart-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color var(--transition), transform var(--transition);
+    padding: 0;
+    line-height: 1;
+}
+
+#poi-heart-btn.liked {
+    color: var(--error);
+}
+
+#poi-heart-btn:hover {
+    transform: scale(1.2);
+}
+
+#booking-bar {
+    position: absolute;
+    top: 72px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 8px 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.booking-slot {
+    display: flex;
+    flex-direction: column;
+    min-width: 120px;
+}
+
+.booking-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.booking-value {
+    font-family: var(--font-main);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px;
+}
+
+#booking-date {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: var(--font-main);
+    font-size: 13px;
+    padding: 4px 8px;
+    outline: none;
+    margin-top: 2px;
+}
+
+#booking-confirm-btn {
+    background: var(--accent);
+    color: #0a0e17;
+    border: none;
+    border-radius: var(--radius);
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 8px 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background var(--transition);
+}
+
+#booking-confirm-btn:disabled {
+    background: var(--border);
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+#booking-confirm-btn:not(:disabled):hover {
+    background: #ffc04a;
+}
+
+#booking-msg {
+    position: absolute;
+    top: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 20px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+#poi-partenza-btn {
+    background: var(--accent2);
+    color: #0a0e17;
+    border: none;
+    border-radius: var(--radius);
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 12px;
+    padding: 8px;
+    cursor: pointer;
+}
+
+#poi-arrivo-btn {
+    background: var(--success);
+    color: #0a0e17;
+    border: none;
+    border-radius: var(--radius);
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 12px;
+    padding: 8px;
+    cursor: pointer;
+}
+
+#booking-reset-btn {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-family: var(--font-main);
+    font-size: 13px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: color var(--transition), border-color var(--transition);
+}
+
+#booking-reset-btn:hover {
+    color: var(--error);
+    border-color: var(--error);
+}
