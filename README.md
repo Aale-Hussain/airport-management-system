@@ -18,13 +18,10 @@ The application follows the MVC architecture, separating presentation (JSP), bus
 - Interactive Map  
 ![Map](images/map.png)
 
-- Booking System  
-![Booking](images/booking&favorites.png.png)
+- Booking System  and Favorites Page  
+![Booking and Favorites](images/booking&favorites.png)
 
-- Favorites Page  
-![Favorites](images/booking&favorites.png.png)
 
----
 
 ## 🚀 Key Features
 
